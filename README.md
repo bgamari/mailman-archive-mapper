@@ -19,11 +19,11 @@ archives, and this is used as the filename for the message archive.  This is
 assigned based on the order in which they are added to the archive, so in
 theory you can derive the number given a copy of the mailbox containing the
 messages.  In practice, occasional errors when inserting messages mean that
-this isn't reliable.
+this isn't approach reliable.
 
-This script works by extracting the time and date of the message from the
-archive HTML, and matching this up with the `Date` header of messages in the
-`.mbox` file.
+Instaed, this script works by extracting the time and date of the message from
+the archive HTML, and matching this up with the `Date` header of messages in
+the `.mbox` file.
 
 Mailman 3 archive URLs are based a hash of the `Message-ID` header, so can be
 generated given a copy of the message.
@@ -78,3 +78,6 @@ same timestamp.  It would be fairly straightforward to assign these correctly
 based on order, but it doesn't currently do this.
 
 The script ignores any messages in the archive that aren't valid UTF-8.
+
+The script assumes that the date is contained in the first `<i>` tag in the
+HTML file.
