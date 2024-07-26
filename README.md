@@ -46,7 +46,7 @@ mailman-archive-mapper /var/lib/mailman/archives/private/ example.com > url-map.
 
 The script assumes that your old archives URLs start with `/mailman/private/`
 and your new URLs start with `/mailman3/hyperkitty/` but you can change these
-defaults with the `--old-base-url` and `--new-base-url` options.
+defaults with the `--old-base-url` and `--new-base-url` options, respectively.
 
 By default, the script will process all lists in the specified directory, but
 you can restrict it to specified lists using the `--list` option (can be
@@ -62,7 +62,7 @@ httxt2dbm -i url-map.txt -o /etc/apache2/mailman-archives.map
 ```
 
 This can then be used in an Apache config as follows (you will need
-`mod_rewrite` enabled).
+`mod_rewrite` enabled):
 
 ```
 RewriteEngine On

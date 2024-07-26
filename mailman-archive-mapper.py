@@ -6,7 +6,6 @@ from dateutil.parser import parse
 from glob import glob
 from bs4 import BeautifulSoup
 from hyperkitty.lib.utils import get_message_id_hash  
-
 import argparse
 
 def warn(msg):
@@ -15,7 +14,7 @@ def warn(msg):
 parser = argparse.ArgumentParser()
 parser.add_argument("--old-base-url", default="/mailman/private/", help="URL prefix for Mailman 2 archive URLs (default: /mailman/private/)")
 parser.add_argument("--new-base-url", default="/mailman3/hyperkitty/", help="URL prefix for Mailman 3 archive URLs (default: /mailman3/hyperkitty/)")
-parser.add_argument("--list", action="append", help="Name of list to map. Can be repeated.  Default is to process all lists.") 
+parser.add_argument("--list", action="append", help="Name of list to map. Can be repeated for multiple lists. Default is to process all lists.") 
 parser.add_argument("old_archive_path")
 parser.add_argument("domain_name")
 args = parser.parse_args()
