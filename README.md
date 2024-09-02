@@ -21,7 +21,7 @@ theory you can derive the number given a copy of the mailbox containing the
 messages.  In practice, occasional errors when inserting messages mean that
 this isn't approach reliable.
 
-Instaed, this script works by extracting the time and date of the message from
+Instead, this script works by extracting the time and date of the message from
 the archive HTML, and matching this up with the `Date` header of messages in
 the `.mbox` file.
 
