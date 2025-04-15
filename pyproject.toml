@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mailman-archive-mapper"
+version = "0.1"
+
+dependencies = [
+    "hyperkitty",
+    "beautifulsoup4",
+    "python-dateutil",
+]
+
+[project.scripts]
+mailman-archive-mapper = "mailman_archive_mapper:main"
