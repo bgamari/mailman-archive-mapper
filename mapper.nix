@@ -1,4 +1,4 @@
-{ buildPythonApplication, setuptools, dateutil, beautifulsoup4, mailmanPackages }:
+{ buildPythonApplication, setuptools, dateutil, beautifulsoup4, mailmanPackages, lxml }:
 
 buildPythonApplication {
   pname = "mailman-archive-mapper";
@@ -10,5 +10,6 @@ buildPythonApplication {
     beautifulsoup4
     mailmanPackages.hyperkitty
     dateutil
+    lxml
   ];
 }
