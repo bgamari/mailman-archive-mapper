@@ -2,7 +2,7 @@
 
 import sys
 import os
-from dateutil.parser import parse
+from dateutil.parser import parse, ParserError
 from glob import glob
 from bs4 import BeautifulSoup
 from hyperkitty.lib.utils import get_message_id_hash
@@ -56,12 +56,16 @@ def main() -> None:
                     if message_id is None and line.lower().startswith('message-id:'):
                         message_id = line[11:].strip().lstrip('<').rstrip('>')
                     if date is not None and message_id is not None:
-                        parsed_date = parse(date)
-                        if parsed_date in link_map:
-                            warn("Duplicate mails for: " + date)
-                        else:
-                            link_map[parsed_date] = message_id
-                        processed = True
+                        try:
+                            parsed_date = parse(date)
+                            if parsed_date in link_map:
+                                warn("Duplicate mails for: " + date)
+                            else:
+                                link_map[parsed_date] = message_id
+                            processed = True
+                        except ParserError:
+                            warn(f"Failed to parse date: {date}")
+                            processed = False
 
         for html_file in glob(os.path.join(archive_root, listname, '*', '[0-9]*.html')):
             with open(html_file) as fin:
@@ -70,7 +74,17 @@ def main() -> None:
                 except UnicodeDecodeError:
                     warn("Unicode error reading %s" % html_file)
                     continue
-                d = parse(soup.find_all("i")[0].get_text())
+
+                try:
+                    date = soup.find_all("i")[0].get_text()
+                    d = parse(date)
+                except IndexError:
+                    warn(f"Failed to find date in {html_file}")
+                    continue
+                except ParserError:
+                    warn(f"Failed to parse date: {date}")
+                    continue
+
                 msg_id = link_map.get(d, None)
                 if msg_id is not None:
                     msg_id_hash = get_message_id_hash(msg_id)
