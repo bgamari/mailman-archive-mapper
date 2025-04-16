@@ -1,5 +1,5 @@
 {
-  description = "Flake utils demo";
+  description = "Mailmap archive mapper generator";
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
